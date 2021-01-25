@@ -193,7 +193,7 @@ uint8_t matrix_scan(void)
             ibmpc_host_enable();
             wait_ms(1); // keyboard can't respond to command without this
 
-            // SKIDATA-2-DE(and some other keyboards?) stores 'Code Set' setting in nonvlatile memory
+            // SKIDATA-2-DE(and some other keyboards?) stores 'Code Set' setting in nonvolatile memory
             // and keeps it until receiving reset. Sending reset here may be useful to clear it, perhaps.
             // https://github.com/tmk/tmk_keyboard/wiki/IBM-PC-AT-Keyboard-Protocol#select-alternate-scan-codesf0
 
@@ -201,7 +201,12 @@ uint8_t matrix_scan(void)
             if (0xFA == ibmpc_host_send(0xFF)) {
                 state = WAIT_AA;
             } else {
-                state = XT_RESET;
+                // With Zenith Z-150 AT stop bit error occurs before recognized
+                if (0x17 == ibmpc_error && 0xFA == ibmpc_host_recv_response()) {
+                    state = WAIT_AA;
+                } else {
+                    state = XT_RESET;
+                }
             }
             xprintf("A%u ", timer_read());
             break;
