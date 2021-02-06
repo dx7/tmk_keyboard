@@ -323,11 +323,11 @@ uint8_t matrix_scan(void)
             switch (keyboard_kind) {
                 case PC_XT:
                     break;
+                case PC_AT_Z150:
+                    // TODO: led_set() works here?
+                    break;
                 case PC_AT:
                     led_set(host_keyboard_leds());
-                    break;
-                case PC_AT_Z150:
-                    // TODO: do not set indicators temporarily for debug
                     break;
                 case PC_TERMINAL:
                     // Set all keys to make/break type
