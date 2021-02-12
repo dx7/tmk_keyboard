@@ -1,0 +1,8 @@
+TARGET = m0110_usb_dx7
+UNIMAP_ENABLE = yes
+KEYMAP_SECTION_ENABLE = yes
+MCU = atmega32u4
+#OPT_DEFS = -DM0110_INTL
+KEYMAP=dx7
+CONFIG_H=config_dx7.h
+include Makefile

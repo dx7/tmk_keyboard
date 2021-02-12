@@ -1,0 +1,5 @@
+TARGET = adb_usb_dx7
+MCU = atmega32u4
+CONFIG_H = config_dx7.h
+KEYMAP=dx7
+include Makefile

@@ -1,0 +1,10 @@
+TARGET          = ibmpc_usb_dx7
+MCU             = atmega32u4
+CONFIG_H        = config_dx7.h
+KEYMAP          = dx7
+MOUSEKEY_ENABLE = no
+
+include Makefile
+
+flash:
+	avrdude -patmega32u4 -cavr109 -b57600 -Uflash:w:$(TARGET).hex -P$(shell ls -1 /dev/tty.usbmodem*)
